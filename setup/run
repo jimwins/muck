@@ -1,0 +1,18 @@
+#!/bin/sh
+set -ex
+
+docker build -t muck-lexicon .
+
+# This assumes we're using Namecheap, could be clever and use ${PROVIDER} to
+# figure out which env variables to pass along
+
+docker run -i -t --rm \
+  -e "MUCK_HOST=${MUCK_HOST}" \
+  -e "EMAIL=${EMAIL}" \
+  -e "PROVIDER=${PROVIDER}" \
+  -e "LEXICON_NAMECHEAP_USERNAME=${LEXICON_NAMECHEAP_USERNAME}" \
+  -e "LEXICON_NAMECHEAP_TOKEN=${LEXICON_NAMECHEAP_TOKEN}" \
+  -e "ACCEPT_TERMS=yes" \
+  -e "CONFIG=/var/www/dehydrated/config" \
+  -v ${PWD}:/app \
+  muck-lexicon /app/entrypoint.sh

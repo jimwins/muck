@@ -1,0 +1,5 @@
+#!/bin/bash
+
+IP=$(docker-machine ip default)
+
+sudo sed -i~ -e "/$MUCK_HOST/ s/.*/$IP	$MUCK_HOST/g" /etc/hosts

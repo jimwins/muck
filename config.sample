@@ -1,0 +1,5 @@
+MUCK_HOST=muck.rawm.us
+EMAIL=jimw@trainedmonkey.com
+PROVIDER=namecheap
+LEXICON_NAMECHEAP_USERNAME=username
+LEXICON_NAMECHEAP_TOKEN=apikey
