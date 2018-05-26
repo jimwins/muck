@@ -2,4 +2,4 @@
 
 IP=$(docker-machine ip default)
 
-sudo sed -i~ -e "/$MUCK_HOST/ s/.*/$IP	$MUCK_HOST/g" /etc/hosts
+sudo sed -i~ -e "/$MUCK_HOST/ s/^[0-9.]*/$IP/g" /etc/hosts
