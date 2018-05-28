@@ -1,0 +1,10 @@
+* create databases from scat/ordure dump files on initial creation
+
+* search should wait until db is available for indexing
+
+* put sphinx wordforms in an ordure table and automatically regenerate it on
+  reindexing
+
+* generate certs with openssl locally if we don't have lexicon configuration
+
+* make scat and ordure available at ${MUCK_HOST}/scat and /ordure, too
