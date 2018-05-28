@@ -1,0 +1,52 @@
+version: '3.1'
+
+services:
+
+  web:
+    build: web
+    links:
+      - db
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ../scat:/var/www/html/scat
+      - ../ordure:/var/www/html/ordure
+      - ./setup/certs:/certs
+      - ./web/conf:/etc/apache2/sites-enabled
+    env_file: ./config
+    environment:
+      - PHP_TIMEZIME=America/Los_Angeles
+      - MYSQL_DATABASE=scat
+      - MYSQL_USER=scat
+      - MYSQL_PASSWORD=scat
+      - MYSQL_HOST_NAME=db
+
+  db:
+    image: mysql:8.0.11
+    restart: always
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=scatpass
+      - MYSQL_USER=scat
+      - MYSQL_PASSWORD=scat
+    # old password auth so we can still use the native Mac OS X mysql client
+    command: [ mysqld, --default_authentication_plugin=mysql_native_password, --innodb_flush_log_at_trx_commit=2, --innodb_log_file_size=256M, --innodb_flush_method=O_DIRECT ]
+    ports:
+      - "3306:3306"
+    volumes:
+      - data:/var/lib/mysql
+
+  search:
+    build: search
+    entrypoint: /app/etc/run.sh
+    ports:
+      - "9306:9306"
+    volumes:
+      - ./search/conf:/app/etc
+      - searchdata:/var/data
+
+volumes:
+  data:
+  searchdata:

@@ -1,0 +1,17 @@
+FROM php:7.2-apache
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  libgd-dev
+
+RUN a2enmod rewrite
+RUN a2enmod ssl
+
+RUN docker-php-ext-install \
+      bcmath \
+      gd \
+      mysqli \
+      pdo \
+      pdo_mysql
+
+EXPOSE 80
+EXPOSE 443
