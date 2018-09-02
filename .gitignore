@@ -2,3 +2,4 @@ config
 setup/accounts
 setup/certs
 setup/lock
+setup/domains.txt
