@@ -12,6 +12,7 @@ services:
     volumes:
       - ../scat:/var/www/html/scat
       - ../ordure:/var/www/html/ordure
+      - ../talapoin:/var/www/html/talapoin
       - ./setup/certs:/certs
       - ./web/conf:/etc/apache2/sites-enabled
     env_file: ./config
