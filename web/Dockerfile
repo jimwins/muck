@@ -1,7 +1,9 @@
 FROM php:7.2-apache
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  libgd-dev
+  git \
+  libgd-dev \
+  zip
 
 RUN a2enmod rewrite
 RUN a2enmod ssl
