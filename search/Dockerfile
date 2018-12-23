@@ -2,9 +2,8 @@ FROM ubuntu:latest
 
 MAINTAINER Jim Winstead, jimw@trainedmonkey.com
 
-ENV VERSION=3.0.3
-
-ENV URL="http://sphinxsearch.com/files/sphinx-${VERSION}-facc3fb-linux-amd64.tar.gz"
+ENV VERSION=3.1.1-612d99f
+ENV URL="http://sphinxsearch.com/files/sphinx-${VERSION}-linux-amd64.tar.gz"
 
 RUN set -ex \
         && apt-get update \
