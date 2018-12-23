@@ -6,7 +6,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   zip
 
 RUN a2enmod rewrite
-RUN a2enmod ssl
 
 RUN docker-php-ext-install \
       bcmath \
@@ -16,4 +15,3 @@ RUN docker-php-ext-install \
       pdo_mysql
 
 EXPOSE 80
-EXPOSE 443
