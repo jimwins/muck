@@ -23,9 +23,6 @@ services:
 
   db:
     image: mysql:8.0.13
-    restart: always
-    volumes:
-      - ./db/init:/docker-entrypoint-initdb.d
     env_file: ./config
     environment:
       - MYSQL_ROOT_PASSWORD=scatpass
@@ -35,6 +32,7 @@ services:
     expose:
       - "3306"
     volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
       - data:/var/lib/mysql
     restart: always
 
