@@ -14,7 +14,7 @@ services:
       - MYSQL_USER=scat
       - MYSQL_HOST_NAME=db
     ports:
-      - "$WEB_PORT:80"
+      - "${WEB_PORT:-8080}:80"
     volumes:
       - ../scat:/var/www/html/scat
       - ../ordure:/var/www/html/ordure
