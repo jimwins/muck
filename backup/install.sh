@@ -8,7 +8,7 @@ set -e
 apk update
 
 # install stuff
-apk add mysql-client python py-pip curl
+apk add mysql-client python py-pip curl tzdata
 
 # install b2 client
 pip install --upgrade b2
