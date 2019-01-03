@@ -16,6 +16,7 @@ RUN docker-php-ext-install \
       gd \
       mysqli \
       pdo \
-      pdo_mysql
+      pdo_mysql \
+      zip
 
 EXPOSE 80
