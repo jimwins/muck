@@ -49,6 +49,12 @@ services:
       - searchdata:/var/data
     restart: always
 
+  backup:
+    build: backup
+    env_file: ./config
+    environment:
+      - MYSQL_HOST=db
+
 volumes:
   data:
   searchdata:
