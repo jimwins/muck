@@ -1,17 +1,18 @@
 FROM php:7.2-apache
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  gifsicle \
   git \
-  jpegoptim \
-  optipng \
-  pngquant \
+  libfreetype6-dev \
   libgd-dev \
-  zip
+  libjpeg62-turbo-dev \
+  libpng-dev \
+  zip \
+  zlib1g-dev
 
 RUN a2enmod rewrite
 
-RUN docker-php-ext-install \
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-install \
       bcmath \
       gd \
       mysqli \
