@@ -19,5 +19,8 @@ docker run -i -t --rm \
   -e "LEXICON_NAMECHEAP_USERNAME=${LEXICON_NAMECHEAP_USERNAME}" \
   -e "LEXICON_NAMECHEAP_TOKEN=${LEXICON_NAMECHEAP_TOKEN}" \
   -e "ACCEPT_TERMS=yes" \
+  --user $(id -u):$(id -g) \
+  --volume /etc/passwd:/etc/passwd:ro \
+  --volume /etc/group:/etc/group:ro \
   -v ${PWD}:/app \
   muck-lexicon /app/entrypoint.sh
