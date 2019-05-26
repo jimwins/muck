@@ -22,9 +22,7 @@ services:
     ports:
       - "${WEB_PORT:-8080}:80"
     volumes:
-      - ../scat:/var/www/html/scat
-      - ../ordure:/var/www/html/ordure
-      - ../talapoin:/var/www/html/talapoin
+      - ..:/var/www/html
       - ./web/conf:/etc/apache2/sites-enabled
     restart: always
     logging: *default-logging
