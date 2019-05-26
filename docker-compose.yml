@@ -1,4 +1,10 @@
-version: '3.1'
+version: '3.4'
+
+x-logging:
+  &default-logging
+  driver: "gelf"
+  options:
+    gelf-address: "udp://graylog.srv.rawm.us:12201"
 
 services:
 
@@ -18,8 +24,10 @@ services:
     volumes:
       - ../scat:/var/www/html/scat
       - ../ordure:/var/www/html/ordure
+      - ../talapoin:/var/www/html/talapoin
       - ./web/conf:/etc/apache2/sites-enabled
     restart: always
+    logging: *default-logging
 
   db:
     image: mysql:8.0.13
@@ -35,6 +43,7 @@ services:
       - ./db/init:/docker-entrypoint-initdb.d
       - data:/var/lib/mysql
     restart: always
+    logging: *default-logging
 
   search:
     image: macbre/sphinxsearch:3.1.1
@@ -47,12 +56,16 @@ services:
       - ./search:/opt/sphinx/conf
       - searchdata:/var/data
     restart: always
+    logging: *default-logging
 
   backup:
     build: backup
     env_file: ./config
     environment:
       - MYSQL_HOST=db
+      - SCHEDULE=0 0 20 * * *
+    restart: always
+    logging: *default-logging
 
 volumes:
   data:
