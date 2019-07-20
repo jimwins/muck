@@ -4,7 +4,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   git \
   libfreetype6-dev \
   libgd-dev \
-  libmagickwand-dev  \
   libjpeg62-turbo-dev \
   libpng-dev \
   libtiff-dev \
@@ -21,6 +20,5 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
       pdo \
       pdo_mysql \
       zip
-RUN pecl install imagick && docker-php-ext-enable imagick
 
 EXPOSE 80
