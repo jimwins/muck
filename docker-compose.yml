@@ -2,30 +2,32 @@ version: '3.4'
 
 x-logging:
   &default-logging
-  driver: "gelf"
-  options:
-    gelf-address: "udp://graylog.srv.rawm.us:12201"
 
 services:
 
-  web:
-    build: web
+  scat:
+    image: jimwins/scat
+    ports:
+      - "127.0.0.1:${SCAT_PORT:-9010}:9000"
     links:
       - db
       - search
     env_file: ./config
-    environment:
-      - PHP_TIMEZIME=America/Los_Angeles
-      - MYSQL_DATABASE=scat
-      - MYSQL_USER=scat
-      - MYSQL_HOST_NAME=db
-    ports:
-      - "${WEB_PORT:-8080}:80"
     volumes:
-      - ..:/var/www/html
-      - ./web/conf:/etc/apache2/sites-enabled
+      - ../scat:/app
     restart: always
-    logging: *default-logging
+
+  ordure:
+    image: jimwins/ordure
+    ports:
+      - "127.0.0.1:${ORDURE_PORT:-9000}:9000"
+    links:
+      - db
+      - search
+    env_file: ./config
+    volumes:
+      - ../ordure:/app
+    restart: always
 
   db:
     image: mysql:8.0.16
@@ -44,7 +46,7 @@ services:
     logging: *default-logging
 
   search:
-    image: macbre/sphinxsearch:3.1.1
+    image: macbre/sphinxsearch:3.2.1
     links:
       - db
     env_file: ./config
