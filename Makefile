@@ -8,6 +8,9 @@ MUCK_PROJECT ?= muck
 certs:
 	cd setup; ./run 
 
+pull:
+	docker-compose -p ${MUCK_PROJECT} pull
+
 up:
 	docker-compose -p ${MUCK_PROJECT} up -d
 
