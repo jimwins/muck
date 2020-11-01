@@ -1,2 +1,5 @@
-foamcore > foamboard
-sculptey > sculpey
+foamcore => foamboard
+sculptey => sculpey
+tecnik => technik
+colour => color
+watercolour => watercolor

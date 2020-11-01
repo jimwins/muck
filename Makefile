@@ -18,5 +18,7 @@ down:
 	docker-compose -p ${MUCK_PROJECT} down
 
 reindex:
-	docker-compose -p ${MUCK_PROJECT} \
-	  exec search /app/bin/indexer --all --rotate
+	mysql -NB scat -e 'SELECT CONCAT(source, " => ", dest) FROM wordform' |\
+          grep -v mysql > search/wordforms.txt
+	docker-compose -p ${MUCK_PROJECT} restart search
+	curl https://scat.${MUCK_HOST}/catalog/~reindex

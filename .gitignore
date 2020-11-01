@@ -1,4 +1,5 @@
 config
+search/wordforms.txt
 setup/accounts
 setup/certs
 setup/lock
